@@ -1,0 +1,134 @@
+<div >
+    <edit-order ng-if="$ctrl.showModalEdit" show="$ctrl.showModalEdit"
+           send="$ctrl.update()" remove="$ctrl.delete()" order="$ctrl.order">
+     
+    </edit-order>
+
+    <create-order ng-if="$ctrl.showModalCreate" show="$ctrl.showModalCreate" order="$ctrl.order" 
+         send="$ctrl.send()">
+     
+    </create-order>
+ 
+   
+   <div class="header">
+       <div class="input-ord">
+          <label class="lebl-order">הזמנות</label> <input class="input-order" type="text" 
+                 ng-model="$ctrl.search"  />
+                 <img src="https://img.icons8.com/material-sharp/20/000000/search.png">
+       </div>
+         <div class="input-new" ng-click="$ctrl.openCreate()">
+            <img src="https://img.icons8.com/color/18/000000/plus-math.png"> <label class="lebl-new" >הזמנה חדשה</label>
+         </div>
+   </div>
+
+    <div>
+        
+    <table class="orders">
+    <thead>
+        <tr>
+
+            <th>מספר הזמנה</th>
+            <th>תאריך יצירה</th>
+            <th>תאריך סיום</th>
+            <th>מוצר</th>
+            <th>כמות</th>
+            <th>מחיר</th>
+            <th>עריכה</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{$ctrl.search}}
+       <tr ng-repeat="row in $ctrl.rows | filter:$ctrl.search">
+        <td style="display: flex;"> 
+            <div>
+                <img src="https://img.icons8.com/material-sharp/10/000000/shopping-cart-loaded.png">
+            </div>
+                        <div>
+                            {{row.order_id}}
+                    </div>
+    </td>  
+           <td>{{row.order_time_begin | date:'HH:mm yyyy-MM-dd '}}</td>
+           <td>{{row.order_time_end | date:'HH:mm yyyy-MM-dd '}}</td>
+           <td>{{row.item_name}}</td>
+           <td>{{row.item_quantity}}</td>
+           <td>{{row.total_price}}</td>
+           <td style="display: flex;" ng-click="$ctrl.editOrder(row)"> 
+               <div >
+                <img src="https://img.icons8.com/android/14/000000/trash.png" style="pad: 3px;">
+               </div>
+               <div>
+                <img src="https://img.icons8.com/android/14/000000/pencil.png" style="padding: 3px;">
+               </div>
+            </td>
+       </tr>
+    </tbody>
+    </table>
+        
+    </div>
+
+     
+</div>
+
+
+<style>
+   .header{
+    padding: 5px;
+    display: flex;
+    width: 100%;
+   } 
+   .input-ord{
+       width: 75%;
+
+   }
+   .input-order{
+       width:90%;
+       border: none;
+    border-bottom: 1px solid #ece0e0;
+}
+
+   .lebl-order{
+    font-size: x-large;
+    font-family: sans-serif;
+   }
+   .input-search{
+       padding: 0px 1px 5px;
+       color: darkslateblue;
+    font-size: 22px;
+   }
+   .input-new{
+    padding-right: 10px;
+    font-size: 22px;
+    font-family: fantasy;
+    color: hotpink;
+   }
+
+   table{
+       width:100%;
+   }
+   .orders {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.orders td, .orders th {
+  border:none;
+  padding: 8px;
+}
+
+.orders td:nth-child(1){color: blueviolet;}
+
+.orders tr:nth-child(even){background-color: #f2f2f2;}
+
+.orders tr:hover {background-color: #ddd;}
+
+.orders th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: right ;
+ border: none;
+ border-bottom: 1px solid #ece0e0;
+  color: black;
+}
+
+</style>
